@@ -85,6 +85,8 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import HomePage from './components/HomePage/HomePage';
 import Portfolio from './components/Portfolio/Portfolio';
+import ForgetPassword from './components/ForgetPassword/ForgetPassword';
+
 
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthContext } from './components/AuthContext';  // Import your AuthContext
@@ -103,6 +105,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" replace />} />
 
           {/* Public routes */}
+          <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 

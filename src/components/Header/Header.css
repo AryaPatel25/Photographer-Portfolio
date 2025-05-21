@@ -124,7 +124,11 @@
   filter: brightness(0) invert(1); /* Makes icon white-like if it's dark */
 }
 
-
+.logout-lottie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 @media (max-width: 991px) {
   .header-container {

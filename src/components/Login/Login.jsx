@@ -36,10 +36,9 @@ const Login = () => {
         ? browserLocalPersistence
         : browserSessionPersistence;
 
-      await setPersistence(auth, persistence); // This must be BEFORE sign-in
+      await setPersistence(auth, persistence);
 
       await signInWithEmailAndPassword(auth, email, password);
-      // AuthContext will handle redirect via currentUser
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
@@ -94,7 +93,9 @@ const Login = () => {
               />
               <p>Remember me</p>
             </label>
-            <a href="#">Forgot password?</a>
+            <Link to="/forget-password" className="forgot-password-link">
+              Forgot password?
+            </Link>
           </div>
           <button type="submit">Log In</button>
           <div className="register">
