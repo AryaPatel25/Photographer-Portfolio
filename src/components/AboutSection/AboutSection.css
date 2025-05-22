@@ -162,18 +162,6 @@
   width: 100%;
 }
 
-.social-buttons {
-  display: flex;
-  gap: 16px;
-  padding: 10px;
-  border-radius: 100px;
-  border: 1px solid #1c1c21;
-  background-color: #070708;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 0 0 auto;
-}
-
 .social-button {
   display: flex;
   align-items: center;
