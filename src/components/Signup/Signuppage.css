@@ -147,6 +147,33 @@ input:focus {
   z-index: 5;
   animation: show 0.6s;
 }
+.google-login-button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px 0;
+  background-color: #4285F4; /* Google blue */
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.google-login-button:hover {
+  background-color: #357ae8;
+}
+
+.google-login-button img {
+  width: 20px;
+  height: 20px;
+}
+
 
 @keyframes show {
   0%,
@@ -227,4 +254,89 @@ input:focus {
 
 .container.right-panel-active .overlay-right {
   transform: translateX(20%);
+}
+
+/* Responsive for tablets and smaller desktops */
+@media (max-width: 900px) {
+  .container {
+    width: 90vw;
+    height: 90vh;
+    min-height: 400px;
+    min-width: 300px;
+  }
+
+  .form-container {
+    width: 100%;
+    position: relative;
+    left: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    z-index: 2 !important;
+    height: auto;
+  }
+
+  .sign-up-container {
+    opacity: 1 !important;
+    z-index: 2 !important;
+    position: relative;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  .sign-in-container {
+    position: relative;
+    width: 100% !important;
+    z-index: 2 !important;
+  }
+
+  .container.right-panel-active .sign-in-container,
+  .container.right-panel-active .sign-up-container {
+    transform: none !important;
+    opacity: 1 !important;
+    z-index: 2 !important;
+  }
+
+  .overlay-container {
+    display: none; /* Hide overlay on smaller screens */
+  }
+
+  form {
+    padding: 20px 30px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .container {
+    width: 100vw;
+    height: auto;
+    min-height: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  form {
+    padding: 15px 20px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }

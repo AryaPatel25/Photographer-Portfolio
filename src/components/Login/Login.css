@@ -123,3 +123,135 @@ button:hover {
   margin-top: 25px;
   color: #fff;
 }
+
+/* ===== New styles for error and admin messages ===== */
+
+/* Error message */
+.error-message {
+  background-color: rgba(211, 47, 47, 0.8); /* semi-transparent red */
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(211, 47, 47, 0.7);
+  user-select: none;
+}
+
+/* Admin message */
+.admin-message {
+  background-color: rgba(25, 118, 210, 0.85); /* semi-transparent blue */
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(25, 118, 210, 0.7);
+  user-select: none;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.google-login-button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px 0;
+  background-color: #4285F4; /* Google blue */
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.google-login-button:hover {
+  background-color: #357ae8; /* Darker blue on hover */
+}
+
+.google-login-button:active {
+  background-color: #2a65c7;
+}
+
+.google-login-button:focus {
+  outline: 3px solid #cce4f7;
+  outline-offset: 2px;
+}
+
+/* Optional: add a Google icon inside the button */
+.google-login-button img {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* Simple fadeIn animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    max-width: 90vw;      /* use most of viewport width on small screens */
+    padding: 30px 20px;  /* reduce padding for smaller devices */
+  }
+
+  h2 {
+    font-size: 1.5rem;   /* smaller heading */
+  }
+
+  .input-field label {
+    font-size: 14px;     /* slightly smaller labels */
+  }
+
+  .input-field input {
+    font-size: 14px;
+    height: 36px;
+  }
+
+  button,
+  .google-login-button {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .forget {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .forget label p {
+    margin-left: 4px;
+  }
+
+  .register {
+    font-size: 14px;
+  }
+}
+
+/* Optional for slightly larger screens (tablet) */
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 350px;
+    padding: 35px 25px;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+}

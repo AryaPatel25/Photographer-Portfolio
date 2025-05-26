@@ -122,6 +122,29 @@
   object-position: center;
   flex-shrink: 0;
 }
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  
+  margin-left: 5%;
+}
+
+.section-icon {
+  width: 36px;           /* control icon size */
+  height: 36px;
+  object-fit: contain;
+}
+
+.photography-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #bbb;           /* adjust as per your theme */
+  margin: 0;
+  white-space: nowrap;
+}
+
 
 .section-title {
   flex: 1 1 0%;
@@ -131,8 +154,7 @@
 
 .intro-text {
   margin-top: 20px;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 18px;  font-weight: 400;
   line-height: 27px;
   color: #afb0b6;
 }
@@ -254,102 +276,94 @@
 }
 
 /* Info Section */
+/* Updated Info Section */
+
 .info-section {
-  border: 1px solid #1c1c21;
+  border: none;
   padding: 80px 162px;
+  background-color: transparent;
 }
 
 .info-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.info-text {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: nowrap;
+  gap: 40px;
+  padding: 40px 60px;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 100px 100px;
+  background-position: center;
+  border-radius: 0;
+  border-top: 2px solid #0a0a0a;
+  border-bottom: 2px solid #0a0a0a;
+  background-color: transparent;
 }
 
 .info-subtitle {
-  font-family: "Manrope", sans-serif;
-  font-size: 22px;
-  font-weight: 500;
-  color: #62646c;
+  font-size: 0.875rem;
   text-transform: uppercase;
+  color: #a69aa0;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
 }
 
 .info-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 80px;
+  font-size: 3rem;
   font-weight: 600;
-  color: #e4e4e6;
-  text-transform: uppercase;
+  color: #e9d7dc;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.info-cta {
+/* CTA Group (Right side) */
+.cta-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: flex-end;
+  text-align: right;
+  gap: 16px;
 }
 
-.cta-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.cta-text {
-  font-family: "Manrope", sans-serif;
-  font-size: 58px;
-  font-weight: 600;
-  color: #fff;
+.cta-heading {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #f5f2f3;
   text-transform: uppercase;
-}
-
-.arrow-icon {
-  font-size: 40px;
-  line-height: 1;
-  color: #e4e4e6;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.arrow-icon:hover,
-.arrow-icon:focus {
-  transform: scale(1.2);
-  outline: none;
+  margin: 0;
 }
 
 .cta-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  padding: 18px 35px;
-  border-radius: 100px;
-  background-color: #4a2ced;
-  box-shadow: 4px 4px 17.4px rgba(255, 255, 255, 0.28) inset;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #7a42f4, #5a32e4);
+  border-radius: 999px;
+  padding: 12px 24px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta-button:hover,
-.cta-button:focus {
-  background-color: #8c52ff;
-  box-shadow:
-    0 0 15px #8c52ff,
-    0 0 40px #8c52ff;
-  outline: none;
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(122, 66, 244, 0.5);
 }
 
-.cta-subtitle {
-  font-family: "Manrope", sans-serif;
-  font-size: 58px;
-  font-weight: 600;
+.cta-button-text {
   color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
   text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.cta-button-icon {
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 /* Services List */
@@ -402,147 +416,115 @@
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 16px;
   padding: 40px 162px;
+  margin-bottom: 160px;
 }
 
 .gallery-item {
-  position: relative;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
+  background: rgba(30, 30, 40, 0.6);
+  border: 1px solid rgba(74, 44, 237, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  height: 300px; /* Fixed rectangle height */
   width: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05) rotate(1.5deg);
+  animation-play-state: paused;
+  box-shadow: 0 20px 50px rgba(74, 44, 237, 0.9),
+    0 0 40px 8px rgba(123, 82, 255, 0.7);
+  /* No filter here */
 }
 
 .gallery-item img {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
-  display: block;
+  border-radius: 20px;
+  transition: filter 0.3s ease;
 }
 
-.gallery-item:hover,
-.gallery-item:focus-within {
-  transform: scale(1.05);
-  box-shadow:
-    0 0 10px #4a2ced,
-    0 0 30px #4a2ced;
-  outline: none;
+@keyframes floatUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
-/* Titles */
-.title-row {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 20px 10%;
-}
-
-.photography-title {
-  position: relative;
-  font-family: "Manrope", sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.photography-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 150px;
-  height: 3px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #4a2ced, #8c52ff);
-}
-
-/* View All Button */
-.view-all-btn {
-  background-color: #4a2ced;
-  border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  padding: 12px 20px;
-  text-decoration: none;
-  box-shadow: 0 0 10px rgba(74, 44, 237, 0.5);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.view-all-btn:hover,
-.view-all-btn:focus {
-  background-color: #8c52ff;
-  box-shadow:
-    0 0 15px #8c52ff,
-    0 0 40px #8c52ff;
-  outline: none;
-}
-
-/* Responsive fixes */
+/* Responsive adjustments */
 @media (max-width: 1024px) {
+  .about-content {
+    flex-direction: column;
+  }
+
+  .info-content {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 20px;
+  }
+
+  /* Assuming you meant these selectors; your code had .info-text and .cta-wrapper
+     but your original code has .cta-group for the right side container.
+     Adjust as needed if your HTML differs */
+  .info-subtitle,
+  .cta-group {
+    flex: 1 1 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .cta-group {
+    justify-content: center;
+  }
+
+  .services-list-columns {
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 40px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+  .about-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .about-title {
+    font-size: 40px; /* smaller title on mobile */
+  }
+
+  .about-cta-button {
+    width: 100%;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    padding: 10px 20px;
+  }
+
+  /* Optional: reduce padding in some sections for small phones */
   .info-section {
     padding: 40px 20px;
   }
-  .about-header {
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 30px;
-  }
-  .about-title {
-    font-size: 36px;
-  }
-  .about-cta-button {
-    width: 100%;
-    text-align: center;
-  }
-  .about-content {
-    flex-direction: column;
-    margin-top: 40px;
-  }
-  .info-title {
-    font-size: 48px;
-  }
-  .info-subtitle,
-  .section-header {
-    font-size: 18px;
-  }
-  .services-list-columns {
-    justify-content: center;
-    padding: 0 20px;
-  }
-  .gallery-grid {
-    grid-template-columns: repeat(1, 1fr);
-    padding: 20px;
-  }
-  .gallery-item img {
-    height: 200px;
-  }
-}
 
-@media (max-width: 480px) {
-  .about-title {
-    font-size: 28px;
-  }
-  .intro-text,
-  .contact-value {
-    font-size: 16px;
-  }
-  .about-cta-button {
-    font-size: 16px;
-    padding: 12px 18px;
-  }
-  .info-title {
-    font-size: 36px;
-  }
-  .info-subtitle {
-    font-size: 14px;
-  }
-  .services-column {
-    min-width: 140px;
+  .about-intro,
+  .contact-info {
+    padding: 20px;
   }
 }

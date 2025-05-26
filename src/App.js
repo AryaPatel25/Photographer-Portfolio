@@ -1,81 +1,11 @@
-// import React, { useState } from "react";
-// import Header from "./components/Header/Header";
-// import Homepage from "./components/HomePage/HomePage";
-// import Portfolio from "./components/Portfolio/Portfolio";
-// import About from "./components/About/About";
-// import Contact from "./components/Contact/Contact";
-// import Footer from "./components/Footer/Footer";
-
-// const App = () => {
-//   const [activeTab, setActiveTab] = useState("Home");
-
-//   const renderPage = () => {
-//     switch (activeTab) {
-//       case "Home":
-//         return <Homepage setActiveTab={setActiveTab} />;
-//       case "About Me":
-//         return <About />;
-//       case "Portfolio":
-//         return <Portfolio />;
-//       case "Contact Me":
-//         return <Contact />;
-//       default:
-//         return <Homepage setActiveTab={setActiveTab} />;
-//     }
-//   };
-//   return (
-//     <>
-//       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-//       <div className="main-content">{renderPage()}</div>
-//       <Footer />
-//     </>
-//   );
-// };
-
-// export default App;
-
-// import React, { useState } from "react";
-// import SignUpPage from "../src/components/Signup/Signuppage";
-// import HomePage from "../src/components/HomePage/HomePage";
-
-// function App() {
-//   const [showSignUp, setShowSignUp] = useState(true);
-
-//   return (
-//     <div>
-//       {showSignUp ? (
-//         <SignUpPage onSignUpComplete={() => setShowSignUp(false)} />
-//       ) : (
-//         <HomePage />
-//       )}
-//     </div>
-//   );
-// }
-
-// export default App;
-// import React, { useState } from "react";
-// import LoginPage from "../src/components/Login/Login";
-// import HomePage from "../src/components/HomePage/HomePage";
-
-// function App() {
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   return (
-//     <div>
-//       {isLoggedIn ? (
-//         <HomePage />
-//       ) : (
-//         <LoginPage onLogin={() => setIsLoggedIn(true)} />
-//       )}
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-import React, { useState, useContext } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signuppage';
@@ -86,70 +16,119 @@ import Header from './components/Header/Header';
 import HomePage from './components/HomePage/HomePage';
 import Portfolio from './components/Portfolio/Portfolio';
 import ForgetPassword from './components/ForgetPassword/ForgetPassword';
+import Dashboard from './components/Dashboard/Dashboard';
+import BlogPage from "./components/Blog/BlogPage";
 
+import ProtectedRoute from './components/Firebase/ProtectedRoute';
+import { AuthContext } from './components/Firebase/AuthContext';
 
-import ProtectedRoute from './components/ProtectedRoute';
-import { AuthContext } from './components/AuthContext';  // Import your AuthContext
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
-  const { currentUser } = useContext(AuthContext);  // Get real user from AuthContext
+  const { currentUser, isAdmin, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return (
+      <div className="loading-screen" style={{
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#0e0e10",
+        color: "#fff",
+        fontSize: "1.5rem"
+      }}>
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <Router>
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      <ScrollToTop />
+      <div className="app-wrapper">
+        <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <div className="main-content">
-        <Routes>
-          {/* Redirect root to login */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
 
-          {/* Public routes */}
-          <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+            {/* Redirect logged-in users away from login/signup */}
+            <Route
+              path="/login"
+              element={currentUser ? <Navigate to="/home" replace /> : <Login />}
+            />
+            <Route
+              path="/signup"
+              element={currentUser ? <Navigate to="/home" replace /> : <Signup />}
+            />
 
-          {/* Protected routes */}
-          <Route 
-            path="/home" 
-            element={
-              <ProtectedRoute isAuthenticated={!!currentUser}>
-                <HomePage setActiveTab={setActiveTab} />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/portfolio" 
-            element={
-              <ProtectedRoute isAuthenticated={!!currentUser}>
-                <Portfolio />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/about" 
-            element={
-              <ProtectedRoute isAuthenticated={!!currentUser}>
-                <About />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/contact" 
-            element={
-              <ProtectedRoute isAuthenticated={!!currentUser}>
-                <Contact />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute isAuthenticated={!!currentUser}>
+                  <HomePage setActiveTab={setActiveTab} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/portfolio"
+              element={
+                <ProtectedRoute isAuthenticated={!!currentUser}>
+                  <Portfolio />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <ProtectedRoute isAuthenticated={!!currentUser}>
+                  <About />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <ProtectedRoute isAuthenticated={!!currentUser}>
+                  <Contact />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/blog"
+              element={
+                <ProtectedRoute isAuthenticated={!!currentUser}>
+                  <BlogPage />
+                </ProtectedRoute>
+              }
+              />
+            <Route
+              path="/admin-dashboard"
+              element={
+                <ProtectedRoute isAuthenticated={!!currentUser && isAdmin}>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
     </Router>
   );
 }
 
 export default App;
-
-

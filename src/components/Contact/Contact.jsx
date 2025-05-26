@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./Contact.css";
-import { db } from "../firebase"; // Adjust path if needed
+import { db } from "../Firebase/firebase"; // Adjust path if needed
 import {
   collection,
   addDoc,

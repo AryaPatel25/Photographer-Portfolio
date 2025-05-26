@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../firebase"; // adjust path as needed
+import { auth } from "../Firebase/firebase"; // adjust path as needed
 import "./ForgetPassword.css";
 import bgImage from "../../assets/login-hero-bg.jpg"; // adjust path as needed
 

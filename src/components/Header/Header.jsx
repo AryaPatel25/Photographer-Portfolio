@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase";  // Adjust path as needed
-import { AuthContext } from "../AuthContext"; // if you want to update auth state globally
+import { auth } from "../Firebase/firebase";
+import { AuthContext } from "../Firebase/AuthContext";
 import Logo from "../../assets/Logo";
 import "./Header.css";
 
@@ -11,14 +11,30 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About Me", path: "/about" },
     { name: "Portfolio", path: "/portfolio" },
-    { name: "Blog", path: "/blog" }, // remove if not used
+    { name: "Blog", path: "/blog" },
   ];
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { currentUser, isAdmin } = useContext(AuthContext);
 
-  // Optional: Access currentUser and auth state from context if needed
-  const { currentUser } = useContext(AuthContext);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when navigating
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Close mobile menu on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   const handleClick = (path) => {
     navigate(path);
@@ -27,63 +43,125 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // After logout, redirect to login
       navigate("/login");
     } catch (error) {
       console.error("Logout error:", error);
-      // Optionally display error to user
     }
   };
 
   return (
-    <div className="header-wrapper">
+    <header className="header-wrapper">
       <div className="header-container">
-        <div className="logo">
+        {/* Logo */}
+        <div
+          className="logo"
+          onClick={() => navigate("/")}
+          tabIndex={0}
+          role="button"
+          aria-label="Go to homepage"
+          onKeyDown={(e) => e.key === "Enter" && navigate("/")}
+        >
           <Logo />
         </div>
 
-        <button className="mobile-menu">
-          <i className="menu-2" aria-label="Toggle menu" />
+        {/* Mobile Menu Button (visible only on small screens) */}
+        <button
+          className="mobile-menu"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((open) => !open)}
+        >
+          <img
+            src="/images/menu.png"  // Changed to menu.png from your public folder
+            alt="Menu"
+            className="menu-icon"
+            draggable={false}
+          />
         </button>
 
-        <div className="nav-container">
-          <nav className="main-nav">
-            <div className="nav-tabs">
-              {navItems.map((item) => (
-                <div
-                  key={item.name}
-                  className={`nav-item ${
-                    location.pathname === item.path ? "nav-item-active" : ""
-                  }`}
-                  onClick={() => handleClick(item.path)}
-                >
-                  {item.name}
-                </div>
-              ))}
-            </div>
-          </nav>
+        {/* Navigation */}
+        <nav
+          className={`nav-container ${mobileMenuOpen ? "mobile-open" : ""}`}
+          aria-label="Primary navigation"
+        >
+          <div className="nav-tabs">
+            {navItems.map((item) => (
+              <div
+                key={item.name}
+                role="link"
+                tabIndex={0}
+                className={`nav-item ${
+                  location.pathname === item.path ? "nav-item-active" : ""
+                }`}
+                onClick={() => handleClick(item.path)}
+                onKeyDown={(e) => e.key === "Enter" && handleClick(item.path)}
+                aria-current={
+                  location.pathname === item.path ? "page" : undefined
+                }
+              >
+                {item.name}
+              </div>
+            ))}
 
-          <button
-            className="contact-button"
-            onClick={() => handleClick("/contact")}
-          >
-            Contact Me
-          </button>
+            {isAdmin && (
+              <div
+                role="link"
+                tabIndex={0}
+                className={`nav-item ${
+                  location.pathname === "/admin-dashboard"
+                    ? "nav-item-active"
+                    : ""
+                }`}
+                onClick={() => handleClick("/admin-dashboard")}
+                onKeyDown={(e) =>
+                  e.key === "Enter" && handleClick("/admin-dashboard")
+                }
+                aria-current={
+                  location.pathname === "/admin-dashboard" ? "page" : undefined
+                }
+              >
+                Dashboard
+              </div>
+            )}
+          </div>
 
-          {/* Logout button right after Contact Me */}
-          {currentUser && (
+          <div className="action-buttons-container">
             <button
-              className="logout-button"
-              onClick={handleLogout}
-              style={{ marginLeft: "10px" }} // optional styling to separate buttons
+              className="contact-button"
+              onClick={() => handleClick("/contact")}
+              tabIndex={0}
             >
-            <img src="/images/logout.png" alt="Logout" className="logout-icon" />
+              Contact Me
             </button>
-          )}
-        </div>
+
+            {currentUser && (
+              <button
+                className="logout-button"
+                onClick={handleLogout}
+                aria-label="Logout"
+                tabIndex={0}
+              >
+                <img
+                  src="/images/logout.png"
+                  alt="Logout"
+                  className="logout-icon"
+                  draggable={false}
+                />
+              </button>
+            )}
+          </div>
+        </nav>
       </div>
-      <div className="header-divider" />
-    </div>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="menu-overlay"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+    </header>
   );
 };
 

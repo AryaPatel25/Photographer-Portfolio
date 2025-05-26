@@ -20,107 +20,104 @@ const HomePage = ({ setActiveTab = () => {} }) => {
   const rightServices = services.slice(4);
 
   return (
-    <div className="homepage">
-      <section className="info-section">
+    <main className="homepage">
+      {/* Hero / Intro Section */}
+      <section
+        className="info-section"
+        aria-label="Introduction to photographer"
+      >
         <div className="info-content">
+          {/* Left Side: Photographer's Name */}
           <div className="info-text">
-            <div className="info-subtitle">Photography by</div>
-            <div className="info-title">Name</div>
+            <p className="info-subtitle">PHOTOGRAPHY BY</p>
+            <h1 className="info-title">Name</h1>
           </div>
 
-          <div className="info-cta">
-            <div className="cta-wrapper">
-              <div className="cta-text">Let's</div>
-              <Link to="/contact" className="cta-button" aria-label="Work Together">
-                <div className="arrow-icon">↗</div>
-              </Link>
-            </div>
-            <div className="cta-subtitle">Work Together</div>
+          {/* Right Side: CTA Button */}
+          <div className="cta-group">
+            <p className="cta-heading">LET’S</p>
+            <Link
+              to="/contact"
+              className="cta-button"
+              aria-label="Go to Contact Page"
+            >
+              <span className="cta-button-text">WORK TOGETHER</span>
+              <span className="cta-button-icon">↗</span>
+            </Link>
           </div>
         </div>
       </section>
 
+      {/* About Preview */}
       <AboutSection preview={true} setActiveTab={setActiveTab} />
 
-      <div className="content-wrapper">
-        <div className="title-row">
+      {/* Work Section */}
+      <section
+        className="content-wrapper"
+        aria-label="Photography Services and Gallery"
+      >
+        <header className="title-row">
           <img
             src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/4eb2ae8ab2a996bd554b48b675226b405048c29f?placeholderIfAbsent=true"
             className="section-icon"
-            alt=""
+            alt="Photography icon"
           />
           <h2 className="photography-title">My Work:-</h2>
+        </header>
+
+        {/* Services List */}
+        <div
+          className="services-list-columns"
+          role="list"
+          aria-label="Photography services offered"
+        >
+          {[leftServices, rightServices].map((columnServices, colIndex) => (
+            <ul key={colIndex} className="services-column" role="list">
+              {columnServices.map((service, index) => (
+                <li
+                  key={index}
+                  className="service-item-vertical"
+                  role="listitem"
+                >
+                  <div className="camera-circle" aria-hidden="true">
+                    <img
+                      src="/images/camera.png"
+                      alt=""
+                      className="camera-icon"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span>{service}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
         </div>
 
-        <div className="services-list-columns">
-          <div className="services-column">
-            {leftServices.map((service, index) => (
-              <div key={index} className="service-item-vertical">
-                <div className="camera-circle">
-                  <img
-                    src="/images/camera.png"
-                    alt="Camera Icon"
-                    className="camera-icon"
-                  />
-                </div>
-                <span>{service}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="services-column">
-            {rightServices.map((service, index) => (
-              <div key={index} className="service-item-vertical">
-                <div className="camera-circle">
-                  <img
-                    src="/images/camera.png"
-                    alt="Camera Icon"
-                    className="camera-icon"
-                  />
-                </div>
-                <span>{service}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <section className="gallery-grid">
-          <div className="gallery-item">
-            <img
-              src="/images/portrait-photography.jpg"
-              alt="Photography sample"
-            />
-          </div>
-          <div className="gallery-item">
-            <img
-              src="/images/commercial-photography.jpg"
-              alt="Photography sample"
-            />
-          </div>
-          <div className="gallery-item">
-            <img
-              src="/images/wedding-photography.jpg"
-              alt="Photography sample"
-            />
-          </div>
-          <div className="gallery-item">
-            <img
-              src="/images/nature-photography.jpg"
-              alt="Photography sample"
-            />
-          </div>
-          <div className="gallery-item">
-            <img
-              src="/images/travel-photography.jpg"
-              alt="Photography sample"
-            />
-          </div>
-          <div className="gallery-item">
-            <img src="/images/holi-photography.jpg" alt="Photography sample" />
-          </div>
+        {/* Gallery Grid */}
+        <section
+          className="gallery-grid"
+          aria-label="Photography portfolio gallery"
+        >
+          {[
+            "/images/portrait-photography.jpg",
+            "/images/commercial-photography.jpg",
+            "/images/wedding-photography.jpg",
+            "/images/nature-photography.jpg",
+            "/images/travel-photography.jpg",
+            "/images/holi-photography.jpg",
+          ].map((src, idx) => (
+            <div key={idx} className="gallery-item">
+              <img
+                src={src}
+                alt={`Photography sample ${idx + 1}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
         </section>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

@@ -1,47 +1,77 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  signInWithEmailAndPassword,
-  setPersistence,
-  browserLocalPersistence,
-  browserSessionPersistence,
-} from "firebase/auth";
-
-import { auth } from "../firebase";
-import { AuthContext } from "../AuthContext";
+import { AuthContext } from "../Firebase/AuthContext";
+import { login } from "../Firebase/authService"; // your existing email/password login service
+import { getIdTokenResult, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../Firebase/firebase"; // <-- Import auth & googleProvider here
 import bgImage from "../../assets/login-hero-bg.jpg";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, setIsAdmin } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [adminMessage, setAdminMessage] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
+      checkAdmin(currentUser);
+    }
+  }, [currentUser]);
+
+  const checkAdmin = async (user) => {
+    try {
+      const idTokenResult = await getIdTokenResult(user);
+      const isAdmin = !!idTokenResult.claims.admin;
+
+      if (setIsAdmin) {
+        setIsAdmin(isAdmin);
+      }
+
+      if (isAdmin) {
+        setAdminMessage(true);
+        setTimeout(() => {
+          navigate("/home");
+        }, 1500);
+      } else {
+        navigate("/home");
+      }
+    } catch (err) {
+      console.error("Error checking admin claim:", err);
       navigate("/home");
     }
-  }, [currentUser, navigate]);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+    setAdminMessage(false);
 
     try {
-      const persistence = rememberMe
-        ? browserLocalPersistence
-        : browserSessionPersistence;
-
-      await setPersistence(auth, persistence);
-
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await login(email, password, rememberMe);
+      await checkAdmin(userCredential.user);
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
+    }
+  };
+
+  // New: Google Sign-in handler
+  const handleGoogleLogin = async () => {
+    setErrorMsg("");
+    setAdminMessage(false);
+
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      await checkAdmin(user);
+    } catch (error) {
+      console.error("Google login error:", error);
+      setErrorMsg("Failed to login with Google.");
     }
   };
 
@@ -65,6 +95,11 @@ const Login = () => {
         <form onSubmit={handleLogin}>
           <h2>Login</h2>
           {errorMsg && <p className="error-message">{errorMsg}</p>}
+          {adminMessage && (
+            <div className="admin-message">
+              Welcome, Admin! Redirecting to the home page...
+            </div>
+          )}
           <div className="input-field">
             <input
               type="email"
@@ -98,6 +133,20 @@ const Login = () => {
             </Link>
           </div>
           <button type="submit">Log In</button>
+
+          {/* Google Login Button */}
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="google-login-button"
+          >
+            <img
+              src="https://th.bing.com/th/id/OIP.Tz56zRxxoZT3t8_ULybhKgHaHa?w=167&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+              alt="Google logo"
+            />
+            Continue with Google
+          </button>
+
           <div className="register">
             <p>
               Don't have an account? <Link to="/signup">Register</Link>

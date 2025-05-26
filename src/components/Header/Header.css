@@ -1,157 +1,263 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
 
 .header-wrapper {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   background-color: #131316;
-
-  /* Sticky header */
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   z-index: 1000;
-
-  /* Add a subtle shadow for separation */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: "Manrope", sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 40px;
-  border: 1px solid #1c1c21;
+  padding: 20px 40px;
+  border-bottom: 1px solid #1c1c21;
+  min-height: 75px; /* matches nav-tabs height for vertical alignment */
 }
 
-.mobile-menu {
-  display: none;
-  background: none;
-  border: none;
+.logo {
   cursor: pointer;
-  font-size: 24px;
-  color: #ffffff;
+  outline-offset: 2px;
+}
+
+.logo:focus {
+  outline: 2px solid #8854ff;
+  border-radius: 6px;
 }
 
 .nav-container {
   display: flex;
   align-items: center;
-  gap: 40px;
-}
-
-.main-nav {
-  display: flex;
-  align-items: center;
-  position: relative;
+  gap: 32px; /* space between nav-tabs and buttons */
 }
 
 .nav-tabs {
   display: flex;
   align-items: center;
-  gap: 10px;
-  border-radius: 12px 12px 0 0;
-  border: 1px solid #1c1c21;
+  height: 75px; /* Ensures children align properly */
+  background-color: #16161a;
+  border-radius: 12px;
+  gap: 8px; /* gap between nav-items */
+  padding: 0;
+  position: relative; /* for ::after underline positioning */
 }
 
+/* Nav items */
 .nav-item {
-  color: #afb0b6;
-  font-family: "Manrope", sans-serif;
+  height: 50px; /* slightly taller for better click area */
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
   font-size: 18px;
-  font-weight: 500;
-  line-height: 150%;
-  padding: 30px 40px;
-  border: 1px solid #1c1c21;
-  cursor: pointer;
-  background-color: transparent;
+  color: #d1d1d1;
+  border-radius: 12px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  outline-offset: 2px;
+}
+
+.nav-item:focus-visible {
+  outline: 2px solid #8854ff;
+}
+
+/* Divider line between nav items except after the last one */
+.nav-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 10px;
+  height: 30px;
+  width: 1px;
+  background-color: #1c1c21;
+}
+
+.nav-item-active {
+  color: #8854ff;
+  background-color: #1a1a1d;
+  border-bottom: none;
+}
+
+.nav-item-active::after {
+  content: "";
+  position: absolute;
+  bottom: 4px; /* lifted a bit from the bottom */
+  left: 24px; /* match horizontal padding */
+  height: 3px;
+  width: calc(100% - 48px); /* full width minus left+right padding */
+  background: linear-gradient(90deg, #4a2ced, #8c52ff);
+  border-radius: 2px;
 }
 
 .nav-item:hover,
-.nav-item-active {
+.nav-item:focus-visible {
+  color: #ffffff;
   background-color: #1a1a1d;
-  color: #ffffff;
 }
 
-.nav-item-active {
-  border: 1px solid #1c1c21;
-}
-
-.contact-button {
-  color: #ffffff;
-  font-family: "Manrope", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 150%;
-  padding: 16px 24px;
-  border-radius: 10px;
-  border: 1px solid #2f2f37;
-  background-color: #1c1c21;
-  cursor: pointer;
-}
-
-.header-divider {
-  height: 1px;
-  background-color: #1c1c21;
-}
-
-
-.main-content {
-  padding-top: 100px; /* Adjust if your header height changes */
-}
-
+/* Buttons: Contact and Logout */
+.contact-button,
 .logout-button {
-  background: transparent;
+  height: 50px;
+  padding: 0 24px;
+  background-color: #4a2ced;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
   border: none;
-  padding: 8px;
-  margin-left: 10px;
+  border-radius: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  gap: 8px;
+  user-select: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  outline-offset: 2px;
 }
 
-.logout-button:hover {
-  transform: scale(1.1);
-  opacity: 0.8;
+.contact-button:hover,
+.logout-button:hover,
+.contact-button:focus-visible,
+.logout-button:focus-visible {
+  background-color: #6e4dff;
+  box-shadow: 0 0 8px #6e4dff;
 }
 
+/* Logout icon */
 .logout-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+
+/* Mobile menu button */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  padding: 0;
+}
+
+.mobile-menu img.menu-icon {
   width: 24px;
   height: 24px;
-  object-fit: contain;
-  filter: brightness(0) invert(1); /* Makes icon white-like if it's dark */
+  user-select: none;
+  pointer-events: none;
 }
 
-.logout-lottie {
+.mobile-menu:focus-visible {
+  outline: 2px solid #8854ff;
+  border-radius: 4px;
+}
+
+/* Container for action buttons */
+.action-buttons-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+  padding-left: 24px; /* space away from divider */
+  margin-left: 24px; /* optional, for bigger gap */
 }
 
-@media (max-width: 991px) {
-  .header-container {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+/* Main content pushed below header */
+.main-content {
+  padding-top: 75px; /* Same height as your fixed header */
+  min-height: calc(100vh - 75px); /* Optional: to fill viewport minus header */
+  background-color: #0e0e10; /* Optional: set background same as your app */
 }
 
-@media (max-width: 640px) {
-  .header-container {
-    padding-left: 16px;
-    padding-right: 16px;
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: flex;
   }
 
   .nav-container {
-    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 260px;
+    background-color: #0e0e10;
+    flex-direction: column;
+    padding: 80px 20px 20px;
+    box-shadow: -4px 0 12px rgba(74, 44, 237, 0.5);
+    transition: right 0.3s ease;
+    z-index: 1050;
   }
 
-  .mobile-menu {
-    display: block;
+  .nav-container.mobile-open {
+    right: 0;
   }
 
-  .logo svg {
-    width: 100px;
+  .nav-tabs {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  .nav-item {
+    font-size: 18px;
+    text-align: left;
+    width: 100%;
+    height: 48px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 8px;
+  }
+
+  .nav-item-active::after {
+    display: none; /* Remove underline on mobile for cleaner look */
+  }
+
+  .action-buttons-container {
+    flex-direction: column;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .contact-button,
+  .logout-button {
+    width: 100%;
+    justify-content: center;
+    border-radius: 12px;
+  }
+}
+
+/* Overlay for mobile menu */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  animation: fadeInOverlay 0.3s forwards;
+}
+
+@keyframes fadeInOverlay {
+  to {
+    opacity: 1;
   }
 }

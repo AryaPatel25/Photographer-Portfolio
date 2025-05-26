@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";  // import useNavigate
+import { useNavigate } from "react-router-dom"; // import useNavigate
 import "./AboutSection.css";
 
 const AboutSection = ({ preview = false }) => {
-  const navigate = useNavigate();  // initialize navigate
+  const navigate = useNavigate(); // initialize navigate
 
   return (
     <div className="about-section">
@@ -12,7 +12,7 @@ const AboutSection = ({ preview = false }) => {
         {preview && (
           <button
             className="about-cta-button"
-            onClick={() => navigate("/about")}  // navigate on click
+            onClick={() => navigate("/about")} // navigate on click
           >
             Know More&nbsp;
             <img
@@ -76,33 +76,83 @@ const AboutSection = ({ preview = false }) => {
 
             <div className="contact-actions">
               <div className="social-buttons">
-                <button className="social-button">
+                <button
+                  className="social-button"
+                  onClick={() =>
+                    window.open(
+                      "https://facebook.com",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                  aria-label="Facebook"
+                >
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/0859b59b29e9211275c0bd63e678e98efeec26d5?placeholderIfAbsent=true"
-                    className="social-icon"
-                    alt="Instagram"
-                  />
-                </button>
-                <button className="social-button">
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/9caf242dac18e50aad2269f4fb76cc4e194b41f9?placeholderIfAbsent=true"
+                    src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/0b242f0ff3ed52d4384da181f7e5530464a63d77?placeholderIfAbsent=true"
                     className="social-icon"
                     alt="Facebook"
                   />
                 </button>
-                <button className="social-button">
+                <button
+                  className="social-button"
+                  onClick={() =>
+                    window.open(
+                      "https://twitter.com",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                  aria-label="Twitter"
+                >
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/e6508e3b3ffc2b2014ca2ae847093414ced8a8be?placeholderIfAbsent=true"
+                    src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/ec2714fb35eced696f65afc05dc207517bf5df91?placeholderIfAbsent=true"
                     className="social-icon"
                     alt="Twitter"
+                  />
+                </button>
+                <button
+                  className="social-button"
+                  onClick={() =>
+                    window.open(
+                      "https://linkedin.com",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                  aria-label="LinkedIn"
+                >
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/5a96035c82473100177e71dc3ef2aac5f4099b6b?placeholderIfAbsent=true"
+                    className="social-icon"
+                    alt="LinkedIn"
+                  />
+                </button>
+                <button
+                  className="social-button"
+                  onClick={() =>
+                    window.open(
+                      "https://instagram.com",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                  aria-label="Instagram"
+                >
+                  <img
+                    src="https://static.vecteezy.com/system/resources/previews/014/414/683/non_2x/instagram-black-logo-on-transparent-background-free-vector.jpg"
+                    className="social-icon"
+                    alt="Instagram"
                   />
                 </button>
               </div>
 
               <div className="action-buttons">
-                <button 
-                className="action-button"
-                onClick={() => navigate("/contact")}>Let's Work</button>
+                <button
+                  className="action-button"
+                  onClick={() => navigate("/contact")}
+                >
+                  Let's Work
+                </button>
               </div>
             </div>
           </div>

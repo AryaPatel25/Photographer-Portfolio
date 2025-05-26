@@ -287,3 +287,62 @@ html, body, #root {
     margin-top: 30px;
   }
 }
+
+@media (max-width: 480px) {
+  .portfolio-container {
+    padding: 30px 15px 15px 15px;
+  }
+
+  .portfolio-header {
+    padding: 20px 15px 25px 15px;
+    border-radius: 16px;
+    gap: 20px;
+  }
+
+  .portfolio-header-content,
+  .header-gallery {
+    width: 100%;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .header-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .header-label {
+    font-size: 0.85rem;
+    letter-spacing: 2.5px;
+    margin-bottom: 10px;
+  }
+
+  .header-description {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .header-gallery {
+    max-width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(74, 44, 237, 0.5);
+  }
+
+  .project-card {
+    min-width: 160px;
+  }
+
+  .project-image {
+    height: 180px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .nav-button {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
+}
