@@ -7,6 +7,12 @@
 
 #firebase authentication
 src/components/Firebase/firebase.js
+src/components/Firebase/firebaseConfig.js
+src/components/Firebase/authService.js
+src/components/Firebase/AuthContext.js
+src/components/Firebase/ProtectedRoute.js
+src/components/Admin/makeAdmin.js
+src/components/Admin/serviceAccountKey.json
 # testing
 /coverage
 
