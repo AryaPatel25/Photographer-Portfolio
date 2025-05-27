@@ -82,8 +82,13 @@ export default function AdminAppointments() {
                         <strong>Name:</strong> {item.firstName} {item.lastName}
                       </p>
                       <p>
+                        <strong>Date:</strong>{" "}
+                        {formatDate(item.appointmentDate)}
+                      </p>
+                      <p>
                         <strong>Time:</strong> {item.appointmentTime}
                       </p>
+
                       <p>
                         <strong>Email:</strong> {item.email}
                       </p>
@@ -108,6 +113,9 @@ export default function AdminAppointments() {
             <div key={item.id} className="appointment-card">
               <p>
                 <strong>Name:</strong> {item.firstName} {item.lastName}
+              </p>
+              <p>
+                <strong>Date:</strong> {formatDate(item.appointmentDate)}
               </p>
               <p>
                 <strong>Time:</strong> {item.appointmentTime}

@@ -55,14 +55,12 @@ const Contact = () => {
     setErrorMsg("");
 
     try {
-      // Validate date and time inputs
       if (!formData.appointmentDate || !formData.appointmentTime) {
         setErrorMsg("Please select both appointment date and time.");
         setLoading(false);
         return;
       }
 
-      // Query existing appointments on the selected date
       const appointmentsRef = collection(db, "appointments");
       const q = query(
         appointmentsRef,
@@ -72,7 +70,6 @@ const Contact = () => {
 
       const requestedStart = timeToMinutes(formData.appointmentTime);
 
-      // Check for overlapping appointments
       let conflictFound = false;
       querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -99,7 +96,6 @@ const Contact = () => {
         return;
       }
 
-      // No conflicts - add appointment
       await addDoc(appointmentsRef, {
         ...formData,
         createdAt: serverTimestamp(),
@@ -140,25 +136,76 @@ const Contact = () => {
           to bring your vision to life.
         </div>
 
+        {/* Social Buttons */}
         <div className="social-media-container">
-          <button className="social-button" aria-label="Facebook">
+          <button
+            className="social-button"
+            aria-label="Facebook"
+            onClick={() =>
+              window.open(
+                "https://facebook.com",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
+          >
             <img
               src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/0b242f0ff3ed52d4384da181f7e5530464a63d77?placeholderIfAbsent=true"
               alt="Facebook"
               className="social-icon"
             />
           </button>
-          <button className="social-button" aria-label="Instagram">
+
+          <button
+            className="social-button"
+            aria-label="LinkedIn"
+            onClick={() =>
+              window.open(
+                "https://linkedin.com",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
+          >
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/ec2714fb35eced696f65afc05dc207517bf5df91?placeholderIfAbsent=true"
-              alt="Instagram"
+              src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/5a96035c82473100177e71dc3ef2aac5f4099b6b?placeholderIfAbsent=true"
+              alt="LinkedIn"
               className="social-icon"
             />
           </button>
-          <button className="social-button" aria-label="Twitter">
+
+          <button
+            className="social-button"
+            aria-label="Twitter"
+            onClick={() =>
+              window.open(
+                "https://twitter.com",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
+          >
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/5a96035c82473100177e71dc3ef2aac5f4099b6b?placeholderIfAbsent=true"
+              src="https://cdn.builder.io/api/v1/image/assets/e988908983e34bf6aa29948865286bf3/ec2714fb35eced696f65afc05dc207517bf5df91?placeholderIfAbsent=true"
               alt="Twitter"
+              className="social-icon"
+            />
+          </button>
+
+          <button
+            className="social-button"
+            aria-label="Instagram"
+            onClick={() =>
+              window.open(
+                "https://instagram.com",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
+          >
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/014/414/683/non_2x/instagram-black-logo-on-transparent-background-free-vector.jpg"
+              alt="Instagram"
               className="social-icon"
             />
           </button>

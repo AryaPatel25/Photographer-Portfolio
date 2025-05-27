@@ -1,11 +1,32 @@
+/* CSS Variables for easy theming */
+:root {
+  --color-bg: #0d0d0d;
+  --color-text: #fff;
+  --color-muted: #888;
+  --color-light-muted: #aaa;
+  --color-border: #333;
+  --color-accent: #00bfff;
+  --color-error: #ff6b6b;
+  --color-error-bg: #330000;
+  --color-success: #4caf50;
+  --color-success-bg: #1a3300;
+  --color-link-bg: #111;
+  --color-link-hover-bg: #1a1a1a;
+  --color-calendar-bg: #111;
+  --color-calendar-border: #222;
+  --color-calendar-header-bg: #0d0d0d;
+  --color-calendar-header-text: var(--color-accent);
+  --color-calendar-hover-bg: #002f5c;
+  --color-calendar-selected-bg: linear-gradient(90deg, #7b2ff7, #f107a3);
+}
+
 /* Global Resets */
 body {
   margin: 0;
   font-family: 'Manrope', sans-serif;
-  background-color: #0d0d0d;
-  color: #fff;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
-
 
 /* Page Container */
 .contact-page {
@@ -26,7 +47,7 @@ body {
 .contact-label {
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--color-light-muted);
   font-size: 14px;
   margin-bottom: 8px;
 }
@@ -34,7 +55,7 @@ body {
 .contact-title {
   font-size: 40px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text);
   margin-bottom: 24px;
 }
 
@@ -55,16 +76,19 @@ body {
 
 .social-button {
   background-color: transparent;
-  border: 1px solid #333;
+  border: 1px solid var(--color-border);
   border-radius: 50%;
   padding: 10px;
   cursor: pointer;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.social-button:hover {
-  border-color: #00bfff;
+.social-button:hover,
+.social-button:focus {
+  border-color: var(--color-accent);
   transform: scale(1.05);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .social-icon {
@@ -74,7 +98,7 @@ body {
 
 .scroll-message {
   font-size: 14px;
-  color: #888;
+  color: var(--color-muted);
   margin-top: 12px;
 }
 
@@ -99,12 +123,12 @@ body {
   font-size: 18px;
   text-transform: uppercase;
   font-weight: 600;
-  color: #aaa;
+  color: var(--color-light-muted);
 }
 
 .section-description {
   font-size: 14px;
-  color: #888;
+  color: var(--color-muted);
   line-height: 1.5;
 }
 
@@ -120,16 +144,21 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-  background-color: #111;
+  background-color: var(--color-link-bg);
   padding: 12px 16px;
   border-radius: 8px;
   border: 1px solid #222;
   color: #eee;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s ease;
 }
 
-.contact-link:hover {
-  background-color: #1a1a1a;
+.contact-link:hover,
+.contact-link:focus {
+  background-color: var(--color-link-hover-bg);
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.3);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  cursor: pointer;
 }
 
 /* Form Section */
@@ -159,23 +188,29 @@ body {
 .form-label {
   font-size: 13px;
   text-transform: uppercase;
-  color: #aaa;
+  color: var(--color-light-muted);
   margin-bottom: 4px;
   font-weight: 600;
   letter-spacing: 1px;
 }
 
 .form-error {
-  color: red;
+  color: var(--color-error);
+  background-color: var(--color-error-bg);
+  padding: 8px 12px;
+  border-radius: 4px;
   margin-top: 1rem;
-  font-weight: bold;
-}
-.form-success {
-  color: green;
-  margin-top: 1rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
+.form-success {
+  color: var(--color-success);
+  background-color: var(--color-success-bg);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 1rem;
+  font-weight: 700;
+}
 
 .input-wrapper {
   display: flex;
@@ -183,20 +218,34 @@ body {
 }
 
 .form-input,
-.form-textarea {
+.form-textarea,
+.time-input-wrapper input[type="time"] {
   padding: 12px 16px;
   border-radius: 6px;
-  border: 1px solid #333;
-  background-color: #111;
-  color: #fff;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-link-bg);
+  color: var(--color-text);
   font-size: 16px;
-  transition: border-color 0.3s;
+  font-family: 'Manrope', sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  flex-grow: 1;
+  min-width: 0; /* Allow shrinking */
+  cursor: pointer;
+  outline-offset: 2px;
+}
+
+.form-input:hover,
+.form-textarea:hover,
+.time-input-wrapper input[type="time"]:hover {
+  border-color: var(--color-accent);
 }
 
 .form-input:focus,
-.form-textarea:focus {
-  border-color: #00bfff;
+.form-textarea:focus,
+.time-input-wrapper input[type="time"]:focus {
+  border-color: var(--color-accent);
   outline: none;
+  box-shadow: 0 0 8px var(--color-accent);
 }
 
 .form-textarea {
@@ -222,41 +271,12 @@ body {
   box-sizing: border-box;
 }
 
-/* Style for the time input */
-.time-input-wrapper input[type="time"],
-.form-input {
-  padding: 12px 16px;
-  border-radius: 6px;
-  border: 1px solid #333;
-  background-color: #111;
-  color: #fff;
-  font-size: 16px;
-  font-family: 'Manrope', sans-serif;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  flex-grow: 1;
-  min-width: 0; /* Allow shrinking */
-  cursor: pointer;
-  outline-offset: 2px;
-}
-
-.time-input-wrapper input[type="time"]:hover,
-.form-input:hover {
-  border-color: #00bfff;
-}
-
-.time-input-wrapper input[type="time"]:focus,
-.form-input:focus {
-  border-color: #00bfff;
-  outline: none;
-  box-shadow: 0 0 8px #00bfff;
-}
-
 /* Style for the calendar/time picker button */
 .time-button {
   background-color: #222;
-  border: 1px solid #333;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  color: #00bfff;
+  color: var(--color-accent);
   font-size: 1.25rem;
   cursor: pointer;
   padding: 8px 12px;
@@ -270,30 +290,28 @@ body {
   white-space: nowrap;  /* Keep icon/text on one line */
 }
 
-.time-button:hover {
-  background-color: #00bfff;
-  color: #111;
-  border-color: #00bfff;
-}
-
+.time-button:hover,
 .time-button:focus {
-  outline: 2px solid #00bfff;
-  outline-offset: 2px;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* Small hint text */
 .form-hint {
-  color: #aaa;
+  color: var(--color-light-muted);
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
 
 /* Calendar container */
 .calendar {
-  background-color: #111;       /* dark background */
-  border: 1px solid #222;       /* subtle border */
+  background-color: var(--color-calendar-bg);
+  border: 1px solid var(--color-calendar-border);
   border-radius: 8px;
-  color: #eee;                  /* light text */
+  color: #eee;
   font-family: 'Manrope', sans-serif;
   width: 320px;
   box-shadow: 0 0 10px rgba(0,0,0,0.7);
@@ -301,13 +319,13 @@ body {
 
 /* Calendar header (month/year display) */
 .calendar-header {
-  background-color: #0d0d0d;
-  color: #00bfff;               /* your accent color */
+  background-color: var(--color-calendar-header-bg);
+  color: var(--color-calendar-header-text);
   font-weight: 700;
   padding: 12px;
   text-align: center;
   font-size: 18px;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--color-calendar-border);
 }
 
 /* Days of week row */
@@ -333,12 +351,12 @@ body {
 
 /* Hover and active day */
 .calendar-day:hover {
-  background-color: #002f5c;    /* your hover color */
-  color: #00bfff;
+  background-color: var(--color-calendar-hover-bg);
+  color: var(--color-accent);
 }
 
 .calendar-day.selected {
-  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  background: var(--color-calendar-selected-bg);
   color: white;
   font-weight: 700;
 }
@@ -353,7 +371,7 @@ body {
 .calendar-nav-button {
   background: transparent;
   border: none;
-  color: #00bfff;
+  color: var(--color-accent);
   font-size: 20px;
   cursor: pointer;
   padding: 8px 12px;
@@ -361,8 +379,11 @@ body {
   border-radius: 6px;
 }
 
-.calendar-nav-button:hover {
-  background-color: #002f5c;
+.calendar-nav-button:hover,
+.calendar-nav-button:focus {
+  background-color: var(--color-calendar-hover-bg);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* Responsive (if calendar is in smaller view) */
@@ -379,7 +400,7 @@ body {
 
 .submit-button {
   background: linear-gradient(90deg, #7b2ff7, #f107a3);
-  color: white;
+  color: var(--color-text);
   padding: 14px 28px;
   font-size: 16px;
   font-weight: 600;
@@ -388,11 +409,15 @@ body {
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.submit-button:hover {
+.submit-button:hover,
+.submit-button:focus {
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(247, 7, 163, 0.6);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* Responsive */

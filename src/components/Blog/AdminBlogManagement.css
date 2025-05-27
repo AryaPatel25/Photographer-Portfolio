@@ -1,0 +1,98 @@
+.admin-blog-management {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #1e1e2f;
+  padding: 20px 30px;
+  border-radius: 12px;
+  color: #ddd;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-blog-management h2,
+.admin-blog-management h3 {
+  color: #b9a6ff;
+}
+
+.blog-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #ccc;
+}
+
+.blog-form input[type="text"],
+.blog-form textarea {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 6px;
+  background: #2a2a3f;
+  color: #eee;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.blog-form button {
+  margin-top: 12px;
+  padding: 10px 25px;
+  background: #7b52ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.blog-form button:hover {
+  background: #a084ff;
+}
+
+.error-msg {
+  color: #ff6b6b;
+  margin-bottom: 10px;
+}
+
+.success-msg {
+  color: #7fff7f;
+  margin-bottom: 10px;
+}
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+}
+
+.blog-item {
+  background: #2a2a3f;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px #7b52ff33;
+}
+
+.blog-item h4 {
+  margin: 0 0 6px 0;
+  color: #b9a6ff;
+}
+
+.blog-item em {
+  color: #7b52ff;
+  font-size: 0.9rem;
+}
+
+.blog-thumbnail {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.error-msg {
+  color: red;
+}
+
+.success-msg {
+  color: green;
+}

@@ -1,35 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../Firebase/firebase"; // adjust path as needed
+import { useNavigate } from "react-router-dom";
 import "./BlogPage.css";
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "How to Build a Portfolio Website",
-    date: "May 26, 2025",
-    summary:
-      "Step-by-step guide to creating a professional portfolio website using React and modern CSS.",
-    imageUrl: "/images/blog1.jpg",
-  },
-  {
-    id: 2,
-    title: "Understanding Glassmorphism in UI Design",
-    date: "April 18, 2025",
-    summary:
-      "Explore the glassmorphism design trend and how to implement it effectively.",
-    imageUrl: "/images/blog2.jpg",
-  },
-  // Add more posts as needed
-];
+function BlogPage({ isAdmin }) {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-const photographyTips = [
-  "Use natural light whenever possible for more vibrant photos.",
-  "Keep your lens clean to avoid blurry shots.",
-  "Rule of thirds helps in composing balanced images.",
-  "Experiment with different perspectives and angles.",
-  "Shoot in RAW format to have more editing flexibility.",
-];
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "blogPosts"));
+        const posts = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setBlogPosts(posts);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPosts();
+  }, []);
 
-function BlogPage() {
+  if (loading) {
+    return <div className="loading-message">Loading blog posts...</div>;
+  }
+
   return (
     <div className="page-container">
       <header className="blog-header portfolio-header">
@@ -37,9 +36,25 @@ function BlogPage() {
           <span className="header-label">BLOG</span>
           <h1 className="header-title">Latest Insights & Stories</h1>
           <p className="header-description">
-            Discover tips, tutorials, and ideas on web development, UI/UX, and
-            design.
+            Discover tips, tutorials, and ideas on web development, UI/UX, and design.
           </p>
+          {isAdmin && (
+            <button
+              className="admin-manage-btn"
+              onClick={() => navigate("/admin/blog-management")}
+              style={{
+                marginTop: "1rem",
+                padding: "0.5rem 1rem",
+                backgroundColor: "#7b52ff",
+                color: "#fff",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Manage Blogs
+            </button>
+          )}
         </div>
         <div className="header-gallery">
           <img
@@ -53,29 +68,16 @@ function BlogPage() {
       <section className="blog-posts-grid projects-grid">
         {blogPosts.map((post) => (
           <article key={post.id} className="blog-post-card project-card">
-            <img
-              src={post.imageUrl}
-              alt={post.title}
-              className="project-image"
-            />
+            {post.imageUrl && (
+              <img src={post.imageUrl} alt={post.title} className="project-image" />
+            )}
             <div className="project-overlay">
               <h3 className="project-title">{post.title}</h3>
               <p className="project-date">{post.date}</p>
-              <p>{post.summary}</p>
+              <p>{post.summary || post.content?.substring(0, 120) + "..."}</p>
             </div>
           </article>
         ))}
-      </section>
-
-      <section className="photography-tips-section">
-        <h2 className="section-title">Photography Tips</h2>
-        <ul className="tips-list">
-          {photographyTips.map((tip, index) => (
-            <li key={index} className="tip-item">
-              {tip}
-            </li>
-          ))}
-        </ul>
       </section>
     </div>
   );

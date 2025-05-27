@@ -1,30 +1,21 @@
 /* Outer Container */
-
 .page-container {
   padding-top: 120px; /* enough space so content won't slide under header */
   max-width: 1200px;
   margin: 0 auto;
   background-color: #121214;
   overflow: visible;
-}
-.blog-container {
-  max-width: 1200px;
-  margin: 40px auto 60px auto;
-  padding: 10px 40px 60px 40px; /* Increased top padding to 120px */
-  background-color: #121214;
-  min-height: 100vh;
-  color: white;
   box-sizing: border-box;
 }
 
-/* Content Wrapper */
-.page-container {
-  max-width: 1200px;
-  padding: 50px 40px;
-  margin: 0 auto;
-  background-color: transparent;
-  box-sizing: border-box;
+.admin-manage-btn {
+  transition: background-color 0.3s ease;
 }
+
+.admin-manage-btn:hover {
+  background-color: #5a3bcc;
+}
+
 
 /* Blog Grid Layout */
 .blog-posts-grid {
@@ -40,18 +31,23 @@
 /* Blog Cards */
 .blog-post-card {
   width: 320px;
-  border-radius: 12px;
-  background-color: #000;
-  box-shadow: 0 0 8px rgba(74, 44, 237, 0.4);
+  border-radius: 16px;
+  background: rgba(30, 30, 40, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(74, 44, 237, 0.25);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  color: #ddd;
+  border: 1px solid rgba(123, 82, 255, 0.15);
 }
 
 .blog-post-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px #4a2ced, 0 0 50px #7b52ff;
+  box-shadow: 0 0 20px #4a2ced, 0 0 50px #7b52ff,
+    0 8px 24px rgba(123, 82, 255, 0.4);
   z-index: 10;
 }
 
@@ -60,7 +56,7 @@
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 12px 12px 0 0;
+  border-radius: 16px 16px 0 0;
   filter: drop-shadow(0 0 6px #7b52ffcc);
   transition: filter 0.3s ease;
 }
@@ -72,17 +68,18 @@
 /* Blog Card Text Content */
 .project-overlay {
   padding: 20px 24px;
-  color: #ddd;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .project-title {
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-bottom: 8px;
   color: #fff;
+  text-shadow: 0 0 6px rgba(123, 82, 255, 0.8);
 }
 
 .project-date {
@@ -90,6 +87,7 @@
   margin-bottom: 16px;
   color: #b9a6ff;
   user-select: none;
+  font-style: italic;
 }
 
 .project-overlay p {
@@ -98,6 +96,8 @@
   line-height: 1.5;
   color: #ccc;
   margin: 0;
+  user-select: text;
+  letter-spacing: 0.02em;
 }
 
 /* Blog Header */
@@ -109,37 +109,48 @@
   padding: 40px 32px;
   gap: 40px;
   box-sizing: border-box;
-  background-color: #1a1a1e;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(123, 82, 255, 0.2);
+  background: rgba(26, 26, 30, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(123, 82, 255, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(123, 82, 255, 0.25);
+  color: #eee;
 }
 
 .portfolio-header-content,
 .header-text-container {
   flex: 1;
   padding: 0 20px;
+  min-width: 280px;
 }
 
 .header-label {
   color: #b9a6ff;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 12px;
   display: inline-block;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(123, 82, 255, 0.7);
+  user-select: none;
 }
 
 .header-title {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin-bottom: 12px;
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 16px;
   color: #fff;
-  text-shadow: 0 0 6px rgba(123, 82, 255, 0.6);
+  text-shadow: 0 0 10px rgba(123, 82, 255, 0.85);
+  line-height: 1.1;
 }
 
 .header-description {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.6;
   color: #ccc;
+  letter-spacing: 0.02em;
 }
 
 /* Header Image */
@@ -148,14 +159,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 320px;
+  max-width: 420px;
 }
 
 .header-gallery-image {
   width: 100%;
-  max-width: 420px;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(123, 82, 255, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(123, 82, 255, 0.5);
   object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.header-gallery-image:hover {
+  transform: scale(1.03);
 }
 
 /* Photography Tips Section */
@@ -163,43 +181,48 @@
   margin-top: 60px;
   background: rgba(30, 30, 40, 0.6);
   padding: 40px 48px;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(74, 44, 237, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  box-shadow: 0 8px 48px 0 rgba(74, 44, 237, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(74, 44, 237, 0.35);
   color: #eee;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
+  user-select: none;
 }
 
 .photography-tips-section .section-title {
   color: #b9a6ff;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 28px;
-  text-shadow: 0 0 6px rgba(123, 82, 255, 0.7);
-  user-select: none;
+  padding-left: 24px; /* add horizontal padding */
+  padding-right: 24px;
+  text-shadow: 0 0 8px rgba(123, 82, 255, 0.8);
 }
 
 .tips-list {
   list-style-type: disc;
-  padding-left: 28px;
-  font-size: 1.2rem;
-  line-height: 1.6;
+  margin-left: 24px; /* Add margin so bullets don't touch edge */
+  padding-left: 0; /* Reset padding-left to 0 because margin handles spacing */
+  padding-right: 24px;
+  font-size: 1.3rem;
+  line-height: 1.7;
   color: #ccc;
+  user-select: text;
 }
 
 .tip-item {
   margin-bottom: 20px;
-  padding-left: 10px;
-  border-left: 3px solid #7b52ff;
-  font-size: 1.1rem;
+  padding-left: 20px; /* Increased padding to separate text from border */
+  padding-right: 12px;
+  border-left: 4px solid #7b52ff;
+  font-size: 1.15rem;
   line-height: 1.6;
   color: #ddd;
-  user-select: text;
 }
 
 /* Layout Consistency Overrides */
@@ -223,10 +246,11 @@
   margin-top: 50px;
 }
 
+/* Responsive Design */
+
 @media (max-width: 1024px) {
-  .blog-container,
   .page-container {
-    padding: 60px 24px;
+    padding-top: 100px;
   }
 
   .portfolio-header-content,
@@ -262,19 +286,21 @@
     padding: 24px 20px;
   }
 
-  .header-gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 0;
+  .header-gallery {
+    max-width: 100%;
+  }
+
+  .header-gallery-image {
+    border-radius: 16px;
   }
 
   .photography-tips-section {
     padding: 32px 20px;
-    border-radius: 16px;
+    border-radius: 20px;
   }
 
   .tips-list {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     padding-left: 20px;
   }
 
@@ -284,9 +310,8 @@
 }
 
 @media (max-width: 480px) {
-  .blog-container,
   .page-container {
-    padding: 40px 16px;
+    padding-top: 80px;
   }
 
   .portfolio-header-content,
@@ -296,11 +321,11 @@
   }
 
   .project-title {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 
   .project-date {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 
   .project-overlay p {
