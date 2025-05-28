@@ -1,14 +1,31 @@
-/* Outer Container */
+/* Overall Page Container */
 .page-container {
-  padding-top: 120px; /* enough space so content won't slide under header */
+  padding-top: 120px;
   max-width: 1200px;
   margin: 0 auto;
   background-color: #121214;
-  overflow: visible;
   box-sizing: border-box;
+  color: #ddd;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Loading Message */
+.loading-message {
+  text-align: center;
+  color: #7b52ff;
+  font-size: 1.3rem;
+  margin-top: 60px;
+}
+
+/* Admin Manage Button */
 .admin-manage-btn {
+  background-color: #7b52ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
   transition: background-color 0.3s ease;
 }
 
@@ -16,106 +33,20 @@
   background-color: #5a3bcc;
 }
 
-
-/* Blog Grid Layout */
-.blog-posts-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px;
-  padding: 30px 20px 0 20px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-/* Blog Cards */
-.blog-post-card {
-  width: 320px;
-  border-radius: 16px;
-  background: rgba(30, 30, 40, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 16px rgba(74, 44, 237, 0.25);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  color: #ddd;
-  border: 1px solid rgba(123, 82, 255, 0.15);
-}
-
-.blog-post-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #4a2ced, 0 0 50px #7b52ff,
-    0 8px 24px rgba(123, 82, 255, 0.4);
-  z-index: 10;
-}
-
-/* Blog Card Image */
-.project-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 16px 16px 0 0;
-  filter: drop-shadow(0 0 6px #7b52ffcc);
-  transition: filter 0.3s ease;
-}
-
-.project-image:hover {
-  filter: drop-shadow(0 0 14px #b58fffdd);
-}
-
-/* Blog Card Text Content */
-.project-overlay {
-  padding: 20px 24px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.project-title {
-  font-weight: 700;
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-  color: #fff;
-  text-shadow: 0 0 6px rgba(123, 82, 255, 0.8);
-}
-
-.project-date {
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-  color: #b9a6ff;
-  user-select: none;
-  font-style: italic;
-}
-
-.project-overlay p {
-  flex-grow: 1;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #ccc;
-  margin: 0;
-  user-select: text;
-  letter-spacing: 0.02em;
-}
-
-/* Blog Header */
+/* Header Section */
 .blog-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 40px 32px;
-  gap: 40px;
-  box-sizing: border-box;
   background: rgba(26, 26, 30, 0.8);
   border-radius: 20px;
   box-shadow: 0 0 40px rgba(123, 82, 255, 0.3);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(123, 82, 255, 0.25);
   color: #eee;
+  box-sizing: border-box;
 }
 
 .portfolio-header-content,
@@ -130,11 +61,11 @@
   font-weight: 700;
   font-size: 1.1rem;
   margin-bottom: 12px;
-  display: inline-block;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-shadow: 0 0 8px rgba(123, 82, 255, 0.7);
   user-select: none;
+  display: inline-block;
 }
 
 .header-title {
@@ -176,77 +107,116 @@
   transform: scale(1.03);
 }
 
-/* Photography Tips Section */
-.photography-tips-section {
-  margin-top: 60px;
-  background: rgba(30, 30, 40, 0.6);
-  padding: 40px 48px;
-  border-radius: 24px;
-  box-shadow: 0 8px 48px 0 rgba(74, 44, 237, 0.35);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(74, 44, 237, 0.35);
-  color: #eee;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+/* Blog Posts Grid */
+.blog-posts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  padding: 30px 20px 60px 20px;
   box-sizing: border-box;
+}
+
+/* Single Blog Post Card */
+.blog-post-card {
+  width: 320px;
+  background: rgba(30, 30, 40, 0.75);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(74, 44, 237, 0.25);
+  border: 1px solid rgba(123, 82, 255, 0.15);
+  color: #ddd;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post-card:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 20px #4a2ced,
+    0 0 50px #7b52ff,
+    0 8px 24px rgba(123, 82, 255, 0.4);
+  z-index: 10;
+}
+
+/* Blog Post Image */
+.blog-post-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  filter: drop-shadow(0 0 6px #7b52ffcc);
+  transition: filter 0.3s ease;
+}
+
+.blog-post-image:hover {
+  filter: drop-shadow(0 0 14px #b58fffdd);
+}
+
+/* Blog Post Content */
+.blog-post-content {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+/* Blog Post Title */
+.blog-post-title {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(123, 82, 255, 0.8);
+}
+
+/* Blog Post Date */
+.blog-post-date {
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  color: #b9a6ff;
+  font-style: italic;
   user-select: none;
 }
 
-.photography-tips-section .section-title {
-  color: #b9a6ff;
-  font-weight: 700;
-  font-size: 2rem;
-  margin-bottom: 28px;
-  padding-left: 24px; /* add horizontal padding */
-  padding-right: 24px;
-  text-shadow: 0 0 8px rgba(123, 82, 255, 0.8);
-}
-
-.tips-list {
-  list-style-type: disc;
-  margin-left: 24px; /* Add margin so bullets don't touch edge */
-  padding-left: 0; /* Reset padding-left to 0 because margin handles spacing */
-  padding-right: 24px;
-  font-size: 1.3rem;
-  line-height: 1.7;
+/* Blog Post Summary */
+.blog-post-summary {
+  flex-grow: 1;
+  font-size: 1.1rem;
+  line-height: 1.5;
   color: #ccc;
+  margin: 0;
   user-select: text;
+  letter-spacing: 0.02em;
 }
 
-.tip-item {
-  margin-bottom: 20px;
-  padding-left: 20px; /* Increased padding to separate text from border */
-  padding-right: 12px;
-  border-left: 4px solid #7b52ff;
-  font-size: 1.15rem;
-  line-height: 1.6;
-  color: #ddd;
+/* Read More Button */
+.read-more-btn {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background-color: #7b52ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+  user-select: none;
 }
 
-/* Layout Consistency Overrides */
-.blog-header,
-.photography-tips-section {
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+.read-more-btn:hover,
+.read-more-btn:focus {
+  background-color: #5a3bcc;
+  outline: none;
 }
 
-.blog-posts-grid {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Vertical Spacing Between Sections */
-.blog-posts-grid,
-.photography-tips-section {
-  margin-top: 50px;
-}
-
-/* Responsive Design */
+/* Responsive Styles */
 
 @media (max-width: 1024px) {
   .page-container {
@@ -254,29 +224,23 @@
   }
 
   .portfolio-header-content,
-  .header-text-container,
-  .section-title,
-  .photography-tips-section {
+  .header-text-container {
     padding: 32px 24px;
   }
 
-  .project-overlay {
+  .blog-post-content {
     padding: 18px 20px;
-  }
-
-  .tips-list {
-    padding-left: 24px;
   }
 }
 
 @media (max-width: 768px) {
   .blog-posts-grid {
     gap: 24px;
-    padding: 20px 0;
+    padding: 20px 0 40px 0;
   }
 
   .blog-post-card {
-    min-width: 100%;
+    width: 100%;
     max-width: 100%;
   }
 
@@ -293,20 +257,6 @@
   .header-gallery-image {
     border-radius: 16px;
   }
-
-  .photography-tips-section {
-    padding: 32px 20px;
-    border-radius: 20px;
-  }
-
-  .tips-list {
-    font-size: 1.1rem;
-    padding-left: 20px;
-  }
-
-  .tip-item {
-    padding-left: 8px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -315,29 +265,24 @@
   }
 
   .portfolio-header-content,
-  .header-text-container,
-  .photography-tips-section {
+  .header-text-container {
     padding: 24px 16px;
   }
 
-  .project-title {
+  .blog-post-title {
     font-size: 1.15rem;
   }
 
-  .project-date {
+  .blog-post-date {
     font-size: 0.85rem;
   }
 
-  .project-overlay p {
+  .blog-post-summary {
     font-size: 1rem;
   }
 
-  .tips-list {
-    font-size: 1rem;
-  }
-
-  .tip-item {
-    font-size: 0.95rem;
-    padding-left: 6px;
+  .read-more-btn {
+    font-size: 0.9rem;
+    padding: 7px 14px;
   }
 }

@@ -7,39 +7,48 @@ import {
   orderBy,
   serverTimestamp,
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "../Firebase/firebase"; // Make sure storage is exported from firebase.js
+import { db } from "../Firebase/firebase";
+import { useNavigate } from "react-router-dom";
 import "./AdminBlogManagement.css";
 
 export default function AdminBlogManagement() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Form state
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [content, setContent] = useState("");
-  const [imageFile, setImageFile] = useState(null);
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  const navigate = useNavigate();
+
+  // Fixed cover image URL used for all blogs
+  const coverImageUrl =
+    "https://th.bing.com/th/id/OIP.HkQqlSZYLCVwlLroBHtDnQHaEc?w=292&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7";
+
+  const fetchBlogs = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const q = query(collection(db, "blogPosts"), orderBy("date", "desc"));
+      const snapshot = await getDocs(q);
+
+      const posts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setBlogs(posts);
+    } catch (err) {
+      console.error("Error fetching blogs:", err);
+      setError("Failed to load blog posts.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const q = query(collection(db, "blogPosts"), orderBy("date", "desc"));
-        const snapshot = await getDocs(q);
-        const posts = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setBlogs(posts);
-      } catch (err) {
-        console.error("Error fetching blogs:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchBlogs();
   }, []);
 
@@ -53,29 +62,11 @@ export default function AdminBlogManagement() {
       return;
     }
 
-    let imageUrl = "";
-
-    try {
-      if (imageFile) {
-        const imageRef = ref(
-          storage,
-          `blogImages/${Date.now()}-${imageFile.name}`
-        );
-        const snapshot = await uploadBytes(imageRef, imageFile);
-        imageUrl = await getDownloadURL(snapshot.ref);
-      }
-    } catch (uploadErr) {
-      console.error("Image upload failed:", uploadErr);
-      setError("Image upload failed. Please try a different image.");
-      return;
-    }
-
     try {
       await addDoc(collection(db, "blogPosts"), {
         title: title.trim(),
         date: date.trim(),
         content: content.trim(),
-        imageUrl: imageUrl || null,
         createdAt: serverTimestamp(),
       });
 
@@ -83,16 +74,8 @@ export default function AdminBlogManagement() {
       setTitle("");
       setDate("");
       setContent("");
-      setImageFile(null);
 
-      // Refresh blog list
-      const q = query(collection(db, "blogPosts"), orderBy("date", "desc"));
-      const snapshot = await getDocs(q);
-      const posts = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setBlogs(posts);
+      fetchBlogs();
     } catch (err) {
       console.error("Error adding blog post:", err);
       setError("Failed to add blog post. Please try again.");
@@ -139,15 +122,6 @@ export default function AdminBlogManagement() {
           />
         </label>
 
-        <label>
-          Upload Image:
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImageFile(e.target.files[0])}
-          />
-        </label>
-
         <button type="submit">Add Blog Post</button>
       </form>
 
@@ -160,24 +134,32 @@ export default function AdminBlogManagement() {
       ) : blogs.length === 0 ? (
         <p>No blog posts yet.</p>
       ) : (
-        <ul className="blog-list">
+        <section className="blog-posts-grid">
           {blogs.map((post) => (
-            <li key={post.id} className="blog-item">
-              <h4>{post.title}</h4>
-              <p>
-                <em>{post.date}</em>
-              </p>
-              {post.imageUrl && (
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  className="blog-thumbnail"
-                />
-              )}
-              <p>{post.content.substring(0, 100)}...</p>
-            </li>
+            <article key={post.id} className="blog-post-card">
+              <img
+                src={coverImageUrl}
+                alt={`Cover for ${post.title}`}
+                className="blog-post-image"
+              />
+              <div className="blog-post-content">
+                <h3 className="blog-post-title">{post.title}</h3>
+                <p className="blog-post-date">{post.date}</p>
+                <p className="blog-post-summary">
+                  {post.summary ||
+                    (post.content ? post.content.substring(0, 140) + "..." : "")}
+                </p>
+                <button
+                  className="read-more-btn"
+                  onClick={() => navigate(`/blog/${post.id}`)}
+                  aria-label={`Read more about ${post.title}`}
+                >
+                  Read More
+                </button>
+              </div>
+            </article>
           ))}
-        </ul>
+        </section>
       )}
     </div>
   );
