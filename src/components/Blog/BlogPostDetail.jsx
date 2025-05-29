@@ -62,6 +62,9 @@ function BlogPostDetail() {
 
   return (
     <div className="post-detail-container">
+      <Link to="/blog" className="back-link">
+        ← Back to Blog Page
+      </Link>
       <h1 className="post-title">{post.title}</h1>
       <p className="post-date">{post.date}</p>
       {post.imageUrl && (
@@ -73,9 +76,6 @@ function BlogPostDetail() {
         />
       )}
       <div className="post-content">{post.content}</div>
-      <Link to="/blog" className="back-link">
-        ← Back to Blog
-      </Link>
     </div>
   );
 }

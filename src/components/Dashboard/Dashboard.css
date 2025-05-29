@@ -174,6 +174,92 @@ textarea {
   margin: 4px auto 0;
 }
 
+
+/* Status Text */
+.appointment-card p strong {
+  color: #ffffff;
+}
+
+.appointment-card p:last-of-type {
+  margin-bottom: 16px;
+}
+
+/* Status Highlight */
+.appointment-card p strong:has(+ span.status) {
+  margin-right: 8px;
+}
+
+.status {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  color: #ffd966;
+  background-color: rgba(255, 217, 102, 0.15);
+}
+
+.status.accepted {
+  color: #82f7c0;
+  background-color: rgba(130, 247, 192, 0.1);
+}
+
+.status.rejected {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+/* Action Buttons Container */
+.appointment-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Accept Button */
+.accept-btn {
+  flex: 1;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #29c187, #25a780);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(41, 193, 135, 0.4);
+}
+
+.accept-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(41, 193, 135, 0.5);
+}
+
+/* Reject Button */
+.reject-btn {
+  flex: 1;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #d63a3a, #a82c2c);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(214, 58, 58, 0.4);
+}
+
+.reject-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(214, 58, 58, 0.5);
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .appointments-container {

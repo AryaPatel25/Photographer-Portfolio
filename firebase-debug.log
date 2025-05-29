@@ -1,0 +1,88 @@
+[debug] [2025-05-29T10:17:33.765Z] ----------------------------------------------------------------------
+[debug] [2025-05-29T10:17:33.771Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ruhi Patel\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions --debug
+[debug] [2025-05-29T10:17:33.772Z] CLI Version:   14.4.0
+[debug] [2025-05-29T10:17:33.772Z] Platform:      win32
+[debug] [2025-05-29T10:17:33.772Z] Node Version:  v22.15.1
+[debug] [2025-05-29T10:17:33.773Z] Time:          Thu May 29 2025 15:47:33 GMT+0530 (India Standard Time)
+[debug] [2025-05-29T10:17:33.773Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-29T10:17:34.288Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-29T10:17:34.292Z] > authorizing via signed-in user (aryapatel252005@gmail.com)
+[debug] [2025-05-29T10:17:34.293Z] [iam] checking project portfolio-website-d19d0 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-05-29T10:17:34.296Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:34.297Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:34.301Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0:testIamPermissions [none]
+[debug] [2025-05-29T10:17:34.303Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0:testIamPermissions x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:34.304Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-05-29T10:17:36.810Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0:testIamPermissions 200
+[debug] [2025-05-29T10:17:36.812Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-05-29T10:17:36.814Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:36.814Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:36.815Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/portfolio-website-d19d0/serviceAccounts/portfolio-website-d19d0@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-05-29T10:17:36.815Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/portfolio-website-d19d0/serviceAccounts/portfolio-website-d19d0@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-05-29T10:17:38.973Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/portfolio-website-d19d0/serviceAccounts/portfolio-website-d19d0@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-05-29T10:17:38.975Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/portfolio-website-d19d0/serviceAccounts/portfolio-website-d19d0@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'portfolio-website-d19d0'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] +  functions: Finished running predeploy script. 
+[debug] [2025-05-29T10:17:47.894Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:47.894Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:47.895Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2025-05-29T10:17:47.896Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:50.779Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudresourcemanager.googleapis.com 200
+[debug] [2025-05-29T10:17:50.780Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2025-05-29T10:17:50.781Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:50.781Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:50.782Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0 [none]
+[debug] [2025-05-29T10:17:52.663Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0 200
+[debug] [2025-05-29T10:17:52.679Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-website-d19d0 {"projectNumber":"816149486890","projectId":"portfolio-website-d19d0","lifecycleState":"ACTIVE","name":"Portfolio-Website","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-05-20T09:48:08.214391Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[debug] [2025-05-29T10:17:52.687Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:52.687Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:52.688Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:52.688Z] Checked if tokens are valid: true, expires at: 1748516462539
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2025-05-29T10:17:52.691Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:52.691Z] Checked if tokens are valid: true, expires at: 1748516462539
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-05-29T10:17:52.694Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:52.694Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:52.696Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-05-29T10:17:52.697Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:52.700Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-05-29T10:17:52.703Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:52.707Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com [none]
+[debug] [2025-05-29T10:17:52.709Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:52.714Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com [none]
+[debug] [2025-05-29T10:17:52.718Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:53.239Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudfunctions.googleapis.com 200
+[debug] [2025-05-29T10:17:53.240Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2025-05-29T10:17:54.933Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/runtimeconfig.googleapis.com 200
+[debug] [2025-05-29T10:17:54.934Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2025-05-29T10:17:55.299Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com 200
+[debug] [2025-05-29T10:17:55.304Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com [omitted]
+[warn] !  functions: missing required API cloudbuild.googleapis.com. Enabling now... 
+[debug] [2025-05-29T10:17:55.308Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:55.311Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:55.312Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com:enable [none]
+[debug] [2025-05-29T10:17:55.321Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com:enable x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:55.346Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com 200
+[debug] [2025-05-29T10:17:55.347Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com [omitted]
+[warn] !  artifactregistry: missing required API artifactregistry.googleapis.com. Enabling now... 
+[debug] [2025-05-29T10:17:55.356Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:55.357Z] Checked if tokens are valid: true, expires at: 1748516462539
+[debug] [2025-05-29T10:17:55.358Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com:enable [none]
+[debug] [2025-05-29T10:17:55.359Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com:enable x-goog-quota-user=projects/portfolio-website-d19d0
+[debug] [2025-05-29T10:17:55.946Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com:enable 400
+[debug] [2025-05-29T10:17:55.952Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/artifactregistry.googleapis.com:enable [omitted]
+[debug] [2025-05-29T10:17:55.975Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com:enable 400
+[debug] [2025-05-29T10:17:55.976Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/portfolio-website-d19d0/services/cloudbuild.googleapis.com:enable [omitted]
+[error] 
+[error] Error: Your project portfolio-website-d19d0 must be on the Blaze (pay-as-you-go) plan to complete this command. Required API artifactregistry.googleapis.com can't be enabled until the upgrade is complete. To upgrade, visit the following URL:
+
+https://console.firebase.google.com/project/portfolio-website-d19d0/usage/details
