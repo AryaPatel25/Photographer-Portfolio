@@ -101,7 +101,7 @@ const Contact = () => {
         createdAt: serverTimestamp(),
       });
 
-      setSuccessMsg("Appointment booked successfully!");
+      setSuccessMsg("Appointment request send successfully!");
       setFormData({
         firstName: "",
         lastName: "",

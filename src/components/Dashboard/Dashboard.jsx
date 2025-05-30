@@ -24,13 +24,29 @@ export default function AdminAppointments() {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const q = query(collection(db, "appointments"), orderBy("createdAt", "desc"));
+        const q = query(
+          collection(db, "appointments"),
+          orderBy("createdAt", "desc")
+        );
         const snapshot = await getDocs(q);
-        setAppointments(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Clear time for accurate comparison
+
+        const filteredAppointments = snapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .filter((appointment) => {
+            const appointmentDate = new Date(appointment.appointmentDate);
+            appointmentDate.setHours(0, 0, 0, 0); // Normalize to midnight
+            return appointmentDate >= today;
+          });
+
+        setAppointments(filteredAppointments);
       } catch (error) {
         alert("Failed to fetch appointments: " + error.message);
       }
     };
+
     fetchAppointments();
   }, []);
 
@@ -112,7 +128,9 @@ export default function AdminAppointments() {
         await sendEmail(rejectedAppointment, "rejected");
       }
 
-      alert(`Appointment for ${rejectedAppointment.email} has been rejected and removed.`);
+      alert(
+        `Appointment for ${rejectedAppointment.email} has been rejected and removed.`
+      );
     } catch (error) {
       alert("Failed to reject appointment: " + error.message);
     } finally {
